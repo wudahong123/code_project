@@ -11,9 +11,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "element-plus": "^2.7.8",
+    "particles.vue3": "^2.12.0",
     "pinia": "^2.1.7",
+    "tsparticles": "^3.5.0",
+    "tsparticles-slim": "^2.12.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
+    "vue3-particles": "^2.12.0",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
