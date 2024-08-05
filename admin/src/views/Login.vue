@@ -7,13 +7,14 @@
         />
 
         <div class="formContainer">
+            <h3>企业门户网站管理系统</h3>
             <el-form
                 ref="loginFormRef"
                 :model="loginForm"
                 status-icon
                 :rules="loginRules"
-                label-width="120px"
-                class="demo-ruleForm"
+                label-width="80px"
+                class="loginform"
             >
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="loginForm.username"  autocomplete="off" />
@@ -36,12 +37,14 @@
    </div>
 </template>
 
+
+
+
+
+
 <script setup>
 import {reactive,ref} from 'vue'
-const handleLogin=()=>{
-    localStorage.setItem("token","kerwin")
-}
-
+import { useRouter } from 'vue-router';
 
 const loginForm=reactive({
     username:"",
@@ -72,9 +75,23 @@ await loadSlim(engine);
 const particlesLoaded = async container => {
 console.log("Particles container loaded", container);
 };
+
+const router=useRouter()
 //提交表单函数
 const submitForm=()=>{
+    //1.校验表单
+    loginFormRef.value.validate((valid)=>{
+        console.log(valid)
+        if(valid){
+            console.log(loginForm)
+            localStorage.setItem("token","kerwin");
 
+            router.push("/index")
+        }
+    })
+    //2.拿到表单内容，提交后台
+    //3.设置token
+    //localStorage.setItem("token","kerwin")
 }
 // 配置particles
 const options={
@@ -156,3 +173,35 @@ const options={
                 }
 
 </script>
+
+
+
+
+
+
+<style lang="scss" scoped>
+.formContainer{
+    width: 500px;
+    height: 300px;
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: rgba($color: #000000, $alpha: 0.5);
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+    h3{
+        font-size: 30px;
+    }
+    .loginform{
+        margin-top: 20px;
+    }
+}
+
+::v-deep .el-form-item__label{
+    color: white;
+}
+
+</style>
