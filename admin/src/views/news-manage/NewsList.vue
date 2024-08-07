@@ -1,5 +1,3 @@
 <template>
-    <div>
-        newslist
-    </div>
+  <div>newslist</div>
 </template>

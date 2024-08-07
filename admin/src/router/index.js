@@ -4,19 +4,17 @@ import MainBox from '../views/MainBox.vue'
 import RoutesConfig from './config'
 import store from '../store/index'
 
-
-const routes=[
+const routes = [
   {
-    path:"/login",
-    name:"login",
-    component:Login
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
-    path:"/mainbox",
-    name:"mainbox",
-    component:MainBox,
+    path: '/mainbox',
+    name: 'mainbox',
+    component: MainBox
   }
-
 ]
 
 const router = createRouter({
@@ -24,36 +22,33 @@ const router = createRouter({
   routes
 })
 
-
-router.beforeEach((to,from,next)=>{
-  if(to.name==="login"){
+router.beforeEach((to, from, next) => {
+  if (to.name === 'login') {
     next()
-  }else{
-    if(!localStorage.getItem("token")){
+  } else {
+    if (!localStorage.getItem('token')) {
       next({
-        path:"/login"
+        path: '/login'
       })
-    }else{
-      if(!store.state.isGetterRouter){
+    } else {
+      if (!store.state.isGetterRouter) {
         ConfigRouter()
         next({
-        path:to.fullPath
-      })
-      }else{
+          path: to.fullPath
+        })
+      } else {
         next()
       }
     }
-  }   
+  }
 })
 
-
-const ConfigRouter=()=>{
-  RoutesConfig.forEach(item=>{
-    router.addRoute("mainbox",item)
+const ConfigRouter = () => {
+  RoutesConfig.forEach((item) => {
+    router.addRoute('mainbox', item)
   })
 
-  store.commit("changeGetterRouter",true)
-
+  store.commit('changeGetterRouter', true)
 }
 
 export default router
