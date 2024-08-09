@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createpersistedstate from 'vuex-persistedstate'
 
 export default createStore({
   state: {
@@ -6,11 +7,21 @@ export default createStore({
     isCollapsed: false
   },
   getters: {},
+
   mutations: {
     changeGetterRouter(state, value) {
       state.isGetterRouter = value
+    },
+    // 控制侧边栏的展开
+    changeCollapsed(state) {
+      state.isCollapsed = !state.isCollapsed
     }
   },
   actions: {},
-  modules: {}
+  modules: {},
+  plugins: [
+    createpersistedstate({
+      paths: ['isCollapsed'] //控制是否持久化
+    })
+  ]
 })
